@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Xzel | HVAC Missed-Call Protection (DFW)</title>
-  <meta name="description" content="Xzel adds a missed-call safety net for HVAC companies: no workflow changes, keep your phone number, and get instant SMS summaries when calls are missed." />
+  <title>Xzel | Missed-Call Protection for HVAC (DFW)</title>
+  <meta name="description" content="Missed HVAC calls = lost jobs. Xzel adds a missed-call safety net: keep your number, no workflow changes, fully automatic lead capture and SMS summaries." />
   <style>
     :root{
-      --bg:#0b1220;
-      --panel:rgba(255,255,255,.04);
+      --bg1:#070d1a;
+      --bg2:#081024;
+      --card:rgba(255,255,255,.04);
       --line:rgba(238,243,255,.14);
       --text:#eef3ff;
       --muted:#b2bedc;
@@ -16,7 +17,7 @@
       --accent2:#7cf0c5;
       --shadow: 0 18px 50px rgba(0,0,0,.35);
       --r:18px;
-      --max:980px;
+      --max:960px;
     }
     *{box-sizing:border-box}
     body{
@@ -25,13 +26,16 @@
       color:var(--text);
       line-height:1.5;
       background:
-        radial-gradient(900px 620px at 12% 0%, rgba(78,166,255,.20), transparent 55%),
-        radial-gradient(860px 620px at 92% 8%, rgba(124,240,197,.14), transparent 58%),
-        linear-gradient(180deg, #081024 0%, #070d1a 100%);
+        radial-gradient(900px 620px at 12% 0%, rgba(78,166,255,.18), transparent 55%),
+        radial-gradient(860px 620px at 92% 8%, rgba(124,240,197,.12), transparent 58%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg1) 100%);
     }
     a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 72px;}
-    header{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:28px}
+    .wrap{max-width:var(--max); margin:0 auto; padding:26px 18px 70px;}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      margin-bottom:22px;
+    }
     .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
     .logo{
       width:42px; height:42px; border-radius:14px;
@@ -39,9 +43,10 @@
       box-shadow: var(--shadow);
       display:grid; place-items:center;
       color:#071023; font-weight:950; letter-spacing:.6px;
+      flex:0 0 auto;
     }
-    .brand .name{font-weight:950; letter-spacing:.2px}
-    .brand .tag{font-size:12.5px; color:var(--muted); margin-top:2px}
+    .name{font-weight:950; letter-spacing:.2px}
+    .tag{font-size:12.5px; color:var(--muted); margin-top:2px}
     .pill{
       font-size:12.5px;
       color:rgba(238,243,255,.9);
@@ -55,27 +60,60 @@
 
     .card{
       border:1px solid var(--line);
-      background: var(--panel);
+      background: var(--card);
       border-radius: var(--r);
       box-shadow: var(--shadow);
     }
 
-    /* Hero */
     .hero{padding:30px 26px}
     h1{
       margin:0 0 10px;
-      font-size:44px;
-      line-height:1.06;
-      letter-spacing:-.8px;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-.9px;
     }
-    @media (max-width: 520px){ h1{font-size:36px} }
+    @media (max-width: 520px){ h1{font-size:38px} }
     .sub{
       margin:0 0 18px;
       color:var(--muted);
       font-size:17px;
       max-width: 70ch;
     }
-    .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:18px}
+
+    .guarantees{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    @media (max-width: 820px){ .guarantees{grid-template-columns:1fr} }
+    .g{
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(238,243,255,.18);
+      background: linear-gradient(180deg, rgba(15,26,51,.55), rgba(15,26,51,.22));
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .ico{
+      width:30px; height:30px; border-radius:12px;
+      display:grid; place-items:center;
+      font-weight:950;
+      color:#061026;
+      background: rgba(124,240,197,.95);
+      box-shadow: 0 8px 22px rgba(0,0,0,.22);
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+    .ico.blue{background: rgba(78,166,255,.95)}
+    .g b{display:block; font-weight:950; margin-bottom:2px}
+    .g p{margin:0; color:rgba(238,243,255,.88); font-size:14.5px; line-height:1.35}
+
+    .cta{
+      display:flex; flex-wrap:wrap; gap:12px;
+      margin-top:18px;
+    }
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:12px 14px;
@@ -83,10 +121,10 @@
       border:1px solid rgba(238,243,255,.18);
       background: rgba(255,255,255,.05);
       text-decoration:none;
-      font-weight:900;
-      transition: transform .06s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
+      font-weight:950;
       cursor:pointer;
+      user-select:none;
+      transition: transform .06s ease, background .2s ease, border-color .2s ease;
     }
     .btn:hover{background: rgba(255,255,255,.07); border-color: rgba(238,243,255,.26)}
     .btn:active{transform: translateY(1px)}
@@ -94,85 +132,54 @@
       background: linear-gradient(135deg, rgba(78,166,255,.95), rgba(78,166,255,.62));
       border-color: rgba(78,166,255,.6);
       color:#061026;
-      font-weight:950;
+      font-weight:1000;
     }
+    .btn.ghost{background: transparent}
 
-    /* Value bullets (big & readable) */
-    .bullets{
-      margin-top:18px;
+    .roi{margin-top:16px; padding:14px 14px; border-radius:16px;
+      border:1px solid rgba(238,243,255,.16);
+      background: linear-gradient(135deg, rgba(78,166,255,.12), rgba(124,240,197,.08));
+      color:rgba(238,243,255,.92);
+    }
+    .roi strong{color:var(--text)}
+    .roi .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:12px;
+      gap:10px;
+      margin-top:10px;
     }
-    @media (max-width: 720px){ .bullets{grid-template-columns:1fr} }
-    .bullet{
-      padding:14px 14px;
-      border-radius:16px;
-      border:1px solid rgba(238,243,255,.18);
-      background: linear-gradient(180deg, rgba(15,26,51,.55), rgba(15,26,51,.25));
+    @media (max-width: 820px){ .roi .grid{grid-template-columns:1fr} }
+    .roi .box{
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(238,243,255,.14);
+      background: rgba(255,255,255,.03);
     }
-    .bullet .t{
-      display:flex; align-items:center; gap:10px;
-      font-weight:950;
-      font-size:16px;
-      margin-bottom:6px;
-      letter-spacing:.1px;
-    }
-    .ico{
-      width:28px; height:28px; border-radius:12px;
-      display:grid; place-items:center;
-      font-weight:950;
-      color:#061026;
-      background: rgba(124,240,197,.95);
-      box-shadow: 0 8px 22px rgba(0,0,0,.25);
-      flex:0 0 auto;
-    }
-    .ico.blue{background: rgba(78,166,255,.95)}
-    .bullet p{margin:0; color:rgba(238,243,255,.9); font-size:14.5px; line-height:1.45}
-    .bullet p strong{color:var(--accent2)}
+    .roi .k{font-weight:1000; letter-spacing:.1px}
+    .roi .v{margin-top:4px; color:rgba(238,243,255,.88); font-size:14.5px; line-height:1.45}
 
-    /* Sections */
-    section{margin-top:18px}
+    section{margin-top:16px}
     .section{padding:18px}
-    .h2{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:.15px;
-      font-weight:950;
-    }
+    .h2{margin:0 0 8px; font-size:18px; font-weight:1000; letter-spacing:.15px}
     .muted{color:var(--muted); font-size:14.5px; line-height:1.7}
-    .how{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-      margin-top:12px;
-    }
-    @media (max-width: 860px){ .how{grid-template-columns:1fr} }
-    .step{
-      padding:16px;
-      border:1px solid var(--line);
+
+    details{
+      border:1px solid rgba(238,243,255,.14);
       border-radius:16px;
       background: rgba(255,255,255,.02);
+      padding:12px 14px;
+      margin-top:10px;
     }
-    .n{
-      width:32px; height:32px; border-radius:12px;
-      background: rgba(78,166,255,.18);
-      border:1px solid rgba(78,166,255,.35);
-      display:grid; place-items:center;
-      font-weight:1000;
-      margin-bottom:10px;
-    }
-    .step b{display:block; margin-bottom:6px; font-weight:950}
-    .step p{margin:0; color:var(--muted); font-size:14.5px}
+    summary{cursor:pointer; font-weight:950}
+    details p{margin:8px 0 0; color:var(--muted); font-size:14.5px; line-height:1.6}
 
-    /* Demo form */
-    .contact{
+    .try{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:12px;
       align-items:start;
     }
-    @media (max-width: 860px){ .contact{grid-template-columns:1fr} }
+    @media (max-width: 860px){ .try{grid-template-columns:1fr} }
     form{display:grid; gap:10px}
     input, textarea{
       width:100%;
@@ -186,7 +193,7 @@
     }
     textarea{min-height:92px; resize:vertical}
     input::placeholder, textarea::placeholder{color:rgba(178,190,220,.78)}
-    .fine{color:rgba(178,190,220,.9); font-size:12.8px; line-height:1.6}
+    .fine{color:rgba(178,190,220,.92); font-size:12.8px; line-height:1.6}
 
     .footer{
       margin-top:22px;
@@ -198,23 +205,6 @@
       flex-wrap:wrap;
       padding: 0 4px;
     }
-
-    /* Small “credibility” strip */
-    .strip{
-      margin-top:14px;
-      border:1px solid rgba(238,243,255,.16);
-      border-radius:16px;
-      padding:12px 14px;
-      background: linear-gradient(135deg, rgba(78,166,255,.12), rgba(124,240,197,.08));
-      color:rgba(238,243,255,.92);
-      font-size:14.5px;
-    }
-    .strip strong{color:var(--text)}
-
-    /* Tiny inline list */
-    .checklist{margin-top:10px; padding-left:18px; color:rgba(238,243,255,.9)}
-    .checklist li{margin:6px 0; font-size:14.5px}
-    .checklist li span{color:var(--accent2); font-weight:900}
   </style>
 </head>
 
@@ -228,74 +218,99 @@
           <div class="tag">HVAC missed-call protection • DFW</div>
         </div>
       </a>
-      <div class="pill">McKinney, TX • Pilot spots available</div>
+      <div class="pill">McKinney, TX • HVAC-only pilot</div>
     </header>
 
-    <!-- HERO -->
     <div class="card hero">
-      <h1>Missed HVAC calls become booked jobs.</h1>
+      <h1>Missed HVAC calls = lost jobs.</h1>
       <p class="sub">
-        Xzel adds a lightweight safety net on top of your current phone setup. When you miss a call, we capture the lead and text your team the details—automatically.
+        Xzel adds a missed-call safety net that works in the background.
+        When you miss a call, we collect the lead and text your team the details—automatically.
       </p>
 
-      <div class="bullets">
-        <div class="bullet">
-          <div class="t"><span class="ico">✓</span>No workflow changes</div>
-          <p>We <strong>do not change</strong> dispatch, scheduling, or how your team works.</p>
+      <div class="guarantees">
+        <div class="g">
+          <div class="ico">✓</div>
+          <div>
+            <b>No workflow changes</b>
+            <p>Keep dispatch + scheduling exactly as-is.</p>
+          </div>
         </div>
-        <div class="bullet">
-          <div class="t"><span class="ico blue">☎</span>Keep your phone number</div>
-          <p>Your customers keep calling the <strong>same number</strong>. We only catch what you miss.</p>
+        <div class="g">
+          <div class="ico blue">☎</div>
+          <div>
+            <b>Keep your phone number</b>
+            <p>Your customers call the same number.</p>
+          </div>
         </div>
-        <div class="bullet">
-          <div class="t"><span class="ico">⚙</span>Fully automatic</div>
-          <p>Once installed, it runs in the background—<strong>nothing for the owner</strong> to do.</p>
-        </div>
-        <div class="bullet">
-          <div class="t"><span class="ico blue">📩</span>Texts your chosen number</div>
-          <p>Missed-call details go to the <strong>owner, dispatcher, or team</strong>—your choice.</p>
+        <div class="g">
+          <div class="ico">⚙</div>
+          <div>
+            <b>Fully automatic</b>
+            <p>Only triggers on missed calls and texts your chosen number(s).</p>
+          </div>
         </div>
       </div>
 
-      <div class="strip">
-        <strong>Simple promise:</strong> if you miss a call, Xzel captures name/zip/issue/urgency and texts the summary to your team so you can call back and close.
+      <div class="roi">
+        <strong>Quick ROI reality (conservative):</strong>
+        <div class="muted" style="margin-top:6px;">
+          If you miss just a couple calls per week, recovering even <b style="color:var(--text);">1 job/month</b> can justify the service.
+        </div>
+        <div class="grid">
+          <div class="box">
+            <div class="k">Example loss</div>
+            <div class="v">Miss 2 calls/week → convert 1 into a job → often <b style="color:var(--text);">$500–$2,000+/month</b> in recoverable revenue (service/repair).</div>
+          </div>
+          <div class="box">
+            <div class="k">What Xzel does</div>
+            <div class="v">Captures <b style="color:var(--text);">name + zip/address + issue + urgency</b> and texts the summary to your team so you can call back fast.</div>
+          </div>
+        </div>
       </div>
 
       <div class="cta">
         <a class="btn primary" href="#try-live">Try Live (agent calls you)</a>
-        <a class="btn" href="#how">See how it works</a>
+        <a class="btn ghost" href="#how">How it works</a>
+        <a class="btn ghost" href="#video">Watch 30s demo</a>
+      </div>
+
+      <div class="fine" style="margin-top:10px;">
+        We don’t publish a public demo number (cost control). The live demo is a short call to your phone, then you receive the SMS summary.
       </div>
     </div>
 
-    <!-- HOW -->
-    <section id="how">
+    <section id="video">
       <div class="card section">
-        <div class="h2">How it works</div>
-        <div class="muted">Three steps. No training. No platform switch.</div>
-
-        <div class="how">
-          <div class="step">
-            <div class="n">1</div>
-            <b>We connect the missed-call trigger</b>
-            <p>If you don’t answer, the call routes to the intake layer. Your main number stays the same.</p>
-          </div>
-          <div class="step">
-            <div class="n">2</div>
-            <b>We capture the lead</b>
-            <p>Short HVAC intake: name, address/zip, issue, urgency. No diagnosing. No pricing.</p>
-          </div>
-          <div class="step">
-            <div class="n">3</div>
-            <b>Your team gets the summary</b>
-            <p>We text (and/or email) the details to your chosen number(s) so you can call back fast.</p>
-          </div>
+        <div class="h2">30‑second demo (optional)</div>
+        <div class="muted">
+          Add a short clip later: “missed call → agent intake → SMS summary.” For PoC, the <b style="color:var(--text);">Try Live</b> demo is enough.
         </div>
       </div>
     </section>
 
-    <!-- TRY LIVE -->
+    <section id="how">
+      <div class="card section">
+        <div class="h2">How it works (simple)</div>
+        <div class="muted">We add a missed-call layer on top of your existing phone setup. No platform switch.</div>
+
+        <details>
+          <summary>Step 1 — Connect missed calls</summary>
+          <p>If your team doesn’t answer, the call routes to the intake layer. Your main number stays the same.</p>
+        </details>
+        <details>
+          <summary>Step 2 — Capture the lead</summary>
+          <p>Short HVAC intake: name, address/zip, issue (AC/heat/maintenance), and urgency. No diagnosing. No pricing.</p>
+        </details>
+        <details>
+          <summary>Step 3 — Text the summary to your team</summary>
+          <p>We text (and/or email) the missed-call summary to the owner/dispatcher/team—whatever number(s) you choose.</p>
+        </details>
+      </div>
+    </section>
+
     <section id="try-live">
-      <div class="card section contact">
+      <div class="card section try">
         <div>
           <div class="h2">Try Live (agent calls you)</div>
           <div class="muted">
@@ -303,22 +318,13 @@
             <b>as if you missed a customer call</b>. After the demo, you’ll get a text summary.
           </div>
 
-          <ul class="checklist">
-            <li><span>1)</span> You submit your phone + name + zip/address</li>
-            <li><span>2)</span> The demo system allowlists your number</li>
-            <li><span>3)</span> You get a quick “missed call” intake demo</li>
-            <li><span>4)</span> You receive the SMS summary</li>
-          </ul>
-
           <div class="fine" style="margin-top:12px;">
+            Built by a Cisco-certified voice engineer in McKinney, TX.<br/>
             Email: <b>you@xzel.ai</b><br/>
-            Service area: <b>McKinney • Frisco • Allen • Plano • Prosper</b><br/>
             © 2026 Xzel
           </div>
         </div>
 
-        <!-- NOTE: Connect this form to your form tool later.
-             Fields included exactly as requested: phone, name, zip/address -->
         <form action="#" method="post">
           <input type="text" name="name" placeholder="Your name" required />
           <input type="tel" name="phone" placeholder="Your phone (for the demo call)" required />
@@ -326,14 +332,14 @@
           <textarea name="notes" placeholder="Optional: what would the homeowner say? (e.g., AC not cooling, no heat, maintenance)"></textarea>
           <button class="btn primary" type="submit">Start Live Demo</button>
           <div class="fine">
-            This is a sample form. When live, connect it to Zoho Forms / Google Forms / webhook so the system can allowlist and trigger the outbound demo call.
+            Sample form only. When live, connect this to a webhook so the system can allowlist your number and trigger the outbound demo call.
           </div>
         </form>
       </div>
     </section>
 
     <div class="footer">
-      <div>© 2026 Xzel • HVAC missed-call protection</div>
+      <div>© 2026 Xzel • HVAC missed‑call protection</div>
       <div>McKinney, TX • Email: you@xzel.ai</div>
     </div>
   </div>
